@@ -4,15 +4,23 @@ import FormularioCadastro from "./components/FormularioCadastro";
 import "./assets/App.css";
 import './assets/index.css';
 class App extends Component {
+  constructor(){
+    super();
+    this.notas=[];
+    this.state={}
+  }
   criarNota(titulo,texto){
-    console.log('Uma nova nota foi criada '+titulo+' '+texto)
-
+    const novaNota = {titulo,texto};
+    this.notas.push(novaNota);
+    this.setState({
+      notas:this.notas
+    })
   }
   render() {
     return (
       <section className="conteudo">
-        <FormularioCadastro criarNota={this.criarNota}/>
-        <ListaDeNotas />
+        <FormularioCadastro criarNota={this.criarNota.bind(this)}/>
+        <ListaDeNotas notas={this.notas}/>
       </section>
     );
   }
